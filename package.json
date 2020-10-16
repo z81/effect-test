@@ -13,8 +13,11 @@
   "license": "ISC",
   "dependencies": {
     "@effect-ts/core": "^0.3.11",
+    "@effect-ts/morphic": "^0.2.12",
     "@types/node": "^14.11.8",
+    "colors": "^1.4.0",
     "cross-fetch": "^3.0.6",
+    "date-fns": "^2.16.1",
     "fetcher-ts": "^1.1.1",
     "fp-ts": "^2.8.3",
     "io-ts": "^2.2.11",

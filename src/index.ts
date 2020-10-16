@@ -1,28 +1,46 @@
-import { flow, pipe } from "@effect-ts/core/Function";
-import * as Effect from "@effect-ts/core/Effect";
-import * as Exit from "@effect-ts/core/Effect/Exit";
+import { pipe } from "@effect-ts/system/Function";
+import { has } from "@effect-ts/system/Has";
+import * as DSL from "@effect-ts/core/Prelude/DSL";
 import * as path from "path";
-import { weatherAction } from "./actions/weather/weather.action";
+import * as X from "@effect-ts/core/XPure";
+import * as T from "@effect-ts/core/Effect";
+import * as Exit from "@effect-ts/system/Exit";
+import * as colors from "colors";
+import { format } from "date-fns";
+import {
+  ConsoleModule,
+  debug,
+  error,
+  log,
+  logLevel,
+  logService,
+} from "./logger";
+import { matchTag } from "@effect-ts/core/Utils";
+import { flow } from "@effect-ts/core/Function";
 import { readConfig } from "./readConfig";
-import { ConfigRaw } from "./models/config";
-import "./logger";
+import { weatherAction } from "./actions/weather/weather.action";
 
-const main = pipe(
-  readConfig,
-  Effect.chain((config) => Effect.provideAll(config)(weatherAction))
+export const program = pipe(
+  T.provide({
+    env: "development",
+    configPath: path.join(__dirname, "..", "environments"),
+  })(readConfig),
+  T.chain((config) => T.provideAll(config)(weatherAction)),
+  T.andThen(error("error 1")),
+  T.andThen(log("log 1")),
+  T.andThen(debug("debug 1"))
 );
 
-const withEnv = Effect.provide({
-  env: "development",
-  configPath: path.join(__dirname, "..", "environments"),
-});
+const cancel = pipe(
+  program,
+  T.provideService(ConsoleModule)({
+    ...logService,
+    logLevel: "error",
+    timeFormat: "dd.MM.yyyy HH:mm:ss",
+    useColors: true,
+  }),
+  T.runMain
+);
 
-// const logger = ({ logLevel }: Pick<ConfigRaw, "logLevel">) => <T>(message: T) =>
-//   Effect.effectTotal(() => {
-//     console.log(`${message} ${logLevel}`);
-//   });
-
-const cancel = Effect.runCancel(withEnv(main), Exit.mapError(console.error));
-
-process.on("SIGTERM", () => Effect.run(cancel));
-process.on("SIGINT", () => Effect.run(cancel));
+process.on("SIGTERM", cancel);
+process.on("SIGINT", cancel);

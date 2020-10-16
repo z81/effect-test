@@ -1,4 +1,4 @@
-import * as Effect from "@effect-ts/core/Effect";
+import * as T from "@effect-ts/core/Effect";
 import { flow, pipe } from "@effect-ts/core/Function";
 import * as path from "path";
 import * as fs from "fs";
@@ -8,14 +8,14 @@ import * as D from "io-ts/Decoder";
 import { Config, ConfigRaw } from "./models/config";
 
 export const readConfig = pipe(
-  Effect.environment<{ env: string; configPath: string }>(),
-  Effect.chain(({ env, configPath }) =>
+  T.environment<{ env: string; configPath: string }>(),
+  T.chain(({ env, configPath }) =>
     readFile(path.join(configPath, `${env}.json`))
   ),
-  Effect.map(flow(JSON.parse, Config.decode, Either.mapLeft(D.draw))),
-  Effect.absolve,
-  Effect.map((config) => config as ConfigRaw) // type union bug
+  T.map(flow(JSON.parse, Config.decode, Either.mapLeft(D.draw))),
+  T.absolve,
+  T.map((config) => config as ConfigRaw)
 );
 
 export const readFile = (fileName: string) =>
-  Effect.fromPromise(() => promisify(fs.readFile)(fileName, "utf8"));
+  T.fromPromise(() => promisify(fs.readFile)(fileName, "utf8"));

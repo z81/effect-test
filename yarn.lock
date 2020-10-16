@@ -9,10 +9,37 @@
   dependencies:
     "@effect-ts/system" "^0.1.12"
 
+"@effect-ts/core@^0.4.9":
+  version "0.4.9"
+  resolved "https://registry.yarnpkg.com/@effect-ts/core/-/core-0.4.9.tgz#1d8ae36c25cc8684515915f46e97b956f7829be7"
+  integrity sha512-KJo2TJJSCq/SUnSyP8GFiMpFTu15c5c42O2MaeIfSbWGiqD3DPETkXGtEgCtiXNY02xZSChTwgOl5MxW2Ak6PA==
+  dependencies:
+    "@effect-ts/system" "^0.2.7"
+
+"@effect-ts/monocle@^0.3.10":
+  version "0.3.10"
+  resolved "https://registry.yarnpkg.com/@effect-ts/monocle/-/monocle-0.3.10.tgz#406a698eb04e777a0b98b70b97956e2fe0287806"
+  integrity sha512-s1Q6A5Fy0brkWKzsA1pLI3Rkz+R7RQu7MvxJAqqYVLf+62ZUdhrUJvc8DpNnyNSceUAJq2443WtbtSclUrsx6A==
+  dependencies:
+    "@effect-ts/core" "^0.4.9"
+
+"@effect-ts/morphic@^0.2.12":
+  version "0.2.12"
+  resolved "https://registry.yarnpkg.com/@effect-ts/morphic/-/morphic-0.2.12.tgz#2d3384de01b99ec2f20c647ce924337f6a9c9d01"
+  integrity sha512-AN+mhNDG41iKoVBua5dXvrnlrYDMnW5ZiDJbM5HVt1tTCHMzIajsU4X0jqWJbofYlHQRUeD0eZMvXjRModYHxw==
+  dependencies:
+    "@effect-ts/core" "^0.4.9"
+    "@effect-ts/monocle" "^0.3.10"
+
 "@effect-ts/system@^0.1.12":
   version "0.1.12"
   resolved "https://registry.yarnpkg.com/@effect-ts/system/-/system-0.1.12.tgz#4148d54a88d139ea1f8a1f1dcfed419d0b43b6af"
   integrity sha512-YT2wXrxHx15AkcwJ7DrHb0LfcPjcKD0DyDTnqCB7JnWiKucqVa97/yHe9uTw0buZi497v+EhpHaevvD/O0IV4Q==
+
+"@effect-ts/system@^0.2.7":
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/@effect-ts/system/-/system-0.2.7.tgz#f563dc74a593bec4fb05ccc016403886fb4f6ce0"
+  integrity sha512-jbqF1VNOAC5cn4HF7hltINNQdgu0ubBHik7Z3LGdRNfmMcYHgdSCiYkw7CGmeMN3H+jBK3fnBSGTA++lvNDUzQ==
 
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
@@ -187,6 +214,11 @@ color-name@~1.1.4:
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"
   integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
 
+colors@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/colors/-/colors-1.4.0.tgz#c50491479d4c1bdaed2c9ced32cf7c7dc2360f78"
+  integrity sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA==
+
 concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
@@ -215,6 +247,11 @@ crypto-random-string@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-2.0.0.tgz#ef2a7a966ec11083388369baa02ebead229b30d5"
   integrity sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==
+
+date-fns@^2.16.1:
+  version "2.16.1"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.16.1.tgz#05775792c3f3331da812af253e1a935851d3834b"
+  integrity sha512-sAJVKx/FqrLYHAQeN7VpJrPhagZc9R4ImZIWYRFZaaohR3KzmuK88touwsSwSVT8Qcbd4zoDsnGfX4GFB4imyQ==
 
 debug@^2.2.0:
   version "2.6.9"

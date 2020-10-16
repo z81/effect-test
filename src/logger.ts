@@ -1,70 +1,75 @@
-import { NonEmptyArray } from "@effect-ts/core/Classic/NonEmptyArray";
-import * as C from "fp-ts/lib/Console";
-import * as D from "fp-ts/lib/Date";
-import { chain, IO } from "fp-ts/lib/IO";
-import { pipe } from "fp-ts/lib/pipeable";
-import * as L from "logging-ts/lib/IO";
+import { pipe } from "@effect-ts/system/Function";
+import { has } from "@effect-ts/system/Has";
+import * as T from "@effect-ts/core/Effect";
+import * as colors from "colors";
+import { format } from "date-fns";
 
-export enum LogLevel {
-  Info,
-  Warning,
-  Error,
-  Debug,
+enum LogLevels {
+  "log" = "log",
+  "info" = "info",
+  "error" = "error",
+  "warn" = "warn",
+  "debug" = "debug",
 }
 
-export type LogLevelUnion = keyof typeof LogLevel;
+export type LogLevelTypes = keyof typeof LogLevels;
 
-interface Entry {
-  message: string;
-  time: Date;
-  level: LogLevel;
-}
+export const logLevels = Object.keys(LogLevels) as LogLevelTypes[];
 
-const showEntry = ({ level, time, message }: Entry) =>
-  `[${level}] ${time.toLocaleString()} ${message}`;
+const consoleColors: { [k in LogLevelTypes]: (msg: string) => string } = {
+  log: colors.white,
+  info: colors.blue,
+  error: colors.red,
+  warn: colors.yellow,
+  debug: colors.gray,
+};
 
-const debugLogger = L.filter(
-  (entry: Entry) => C.log(showEntry(entry)),
-  (e) => e.level >= LogLevel.Debug
+type ConsoleLogFunctions = {
+  [k in LogLevelTypes]: (message: string) => T.UIO<void>;
+};
+export type ConsoleModule = ConsoleLogFunctions & {
+  logLevel: LogLevelTypes;
+  timeFormat: string;
+  useColors: boolean;
+};
+
+export const ConsoleModule = has<ConsoleModule>();
+
+export const {
+  log,
+  error,
+  debug,
+  info,
+  logLevel,
+  timeFormat,
+  useColors,
+} = T.deriveLifted(ConsoleModule)(
+  logLevels,
+  [],
+  ["logLevel", "timeFormat", "useColors"]
 );
 
-const errorLogger = L.filter(
-  (entry: Entry) => C.error(showEntry(entry)),
-  (e) => e.level >= LogLevel.Error
-);
+const consoleWriter = (message: string, type: LogLevelTypes) =>
+  T.effectTotal(() => console[type](message));
 
-const infoLogger = L.filter(
-  (entry: Entry) => C.info(showEntry(entry)),
-  (e) => e.level >= LogLevel.Info
-);
+const makeLogger = (type: LogLevelTypes) => (message: string) =>
+  pipe(
+    T.struct({
+      logLevel: T.accessM(() => logLevel),
+      timeFormat: T.accessM(() => timeFormat),
+      useColors: T.accessM(() => useColors),
+    }),
+    T.chain(({ logLevel, timeFormat, useColors }) => {
+      if (logLevels.indexOf(type) < logLevels.indexOf(logLevel)) {
+        return T.effectTotal(() => {});
+      }
 
-const warnLogger = L.filter(
-  (entry: Entry) => C.warn(showEntry(entry)),
-  (e) => e.level >= LogLevel.Warning
-);
+      const text = `${format(new Date(), timeFormat)}: ${message}`;
+      const coloredText = useColors ? consoleColors[type](text) : text;
+      return consoleWriter(coloredText, type);
+    })
+  );
 
-const logger = L.getMonoid<Entry>().concat(
-  debugLogger,
-  errorLogger
-  // infoLogger,
-  // warnLogger
-);
-
-const info = (message: string) => (time: Date): IO<void> =>
-  infoLogger({ message, time, level: LogLevel.Info });
-
-const debug = (message: string) => (time: Date): IO<void> =>
-  debugLogger({ message, time, level: LogLevel.Debug });
-
-const program = pipe(
-  D.create,
-  chain(info("boot")),
-  chain(() => D.create),
-  chain(debug("Hello!"))
-);
-
-program();
-
-export const LogLevels = Object.entries(LogLevel)
-  .filter(([, value]) => typeof value === "number")
-  .map(([key]) => key) as LogLevelUnion[];
+export const logService = {
+  ...Object.fromEntries(logLevels.map((type) => [type, makeLogger(type)])),
+} as ConsoleLogFunctions;
