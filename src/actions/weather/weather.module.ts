@@ -1,5 +1,5 @@
 import * as T from "@effect-ts/core/Effect";
-import { ConsoleModule } from "../../logger/logger";
+import { ConsoleModule } from "../../console/console";
 import { Has, has } from "@effect-ts/core/Classic/Has";
 
 export type WeatherActionModule = {

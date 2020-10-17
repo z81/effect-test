@@ -1,7 +1,7 @@
 import * as T from "@effect-ts/core/Effect";
 import { pipe } from "@effect-ts/core/Function";
 import { openWeatherToken, WeatherActionModule } from "./weather.module";
-import { info } from "../../logger/logger";
+import { info } from "../../console/console";
 import { weatherSearch } from "./weather.api";
 
 export const weatherActionService: WeatherActionModule = {

@@ -1,5 +1,5 @@
 import * as D from "io-ts/Decoder";
-import { logLevels, LogLevelTypes } from "../logger/logger";
+import { logLevels, LogLevelTypes } from "../console/console";
 
 const levels = logLevels.map((level) => D.literal(level)) as [
   D.Decoder<unknown, LogLevelTypes>

@@ -9,7 +9,7 @@ import {
   LogLevelTypes,
   timeFormat,
   useColors,
-} from "./logger.module";
+} from "./console.module";
 
 const consoleColors: { [k in LogLevelTypes]: (msg: string) => string } = {
   log: colors.white,

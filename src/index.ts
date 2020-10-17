@@ -1,10 +1,10 @@
 import { pipe } from "@effect-ts/system/Function";
 import * as path from "path";
 import * as T from "@effect-ts/core/Effect";
-import { ConsoleModule, logService } from "./logger/logger";
+import { ConsoleModule, logService } from "./console/console";
 import { readConfig } from "./readConfig";
 import { exec, WeatherActionModule } from "./actions/weather/weather.module";
-import { weatherActionService } from "./actions/weather/weather.action";
+import { weatherActionService } from "./actions/weather/weather";
 
 export const program = pipe(
   T.provide({
