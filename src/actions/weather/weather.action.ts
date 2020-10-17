@@ -4,7 +4,7 @@ import * as querystring from "querystring";
 import { Fetcher } from "fetcher-ts";
 import * as E from "@effect-ts/core/Classic/Either";
 import { Weather, WeatherRaw } from "../../models/weather";
-import { ConsoleModule, info } from "../../logger";
+import { ConsoleModule, info } from "../../logger/logger";
 
 const OPEN_WEATHER_ENDPOINT = "http://api.openweathermap.org/data/2.5/weather";
 

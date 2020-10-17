@@ -14,7 +14,7 @@ import {
   log,
   logLevel,
   logService,
-} from "./logger";
+} from "./logger/logger";
 import { matchTag } from "@effect-ts/core/Utils";
 import { flow } from "@effect-ts/core/Function";
 import { readConfig } from "./readConfig";

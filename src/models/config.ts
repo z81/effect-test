@@ -1,6 +1,6 @@
 import { nonEmptyArray } from "@effect-ts/core/Classic";
 import * as D from "io-ts/Decoder";
-import { logLevels, LogLevelTypes } from "../logger";
+import { logLevels, LogLevelTypes } from "../logger/logger";
 import { DecoderURI, FastCheckURI, make, opaque } from "@effect-ts/morphic";
 
 const levels = logLevels.map((level) => D.literal(level)) as [
