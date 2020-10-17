@@ -1,8 +1,10 @@
 import * as T from "@effect-ts/core/Effect";
 import { pipe } from "@effect-ts/core/Function";
-import { openWeatherToken, WeatherActionModule } from "./weather.module";
+
 import { info } from "../../console/console";
 import { weatherSearch } from "./weather.api";
+import type { WeatherActionModule } from "./weather.module";
+import { openWeatherToken } from "./weather.module";
 
 export const weatherActionService: WeatherActionModule = {
   openWeatherToken: "",

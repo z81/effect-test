@@ -1,6 +1,8 @@
+import type { Has } from "@effect-ts/core/Classic/Has";
+import { has } from "@effect-ts/core/Classic/Has";
 import * as T from "@effect-ts/core/Effect";
-import { ConsoleModule } from "../../console/console";
-import { Has, has } from "@effect-ts/core/Classic/Has";
+
+import type { ConsoleModule } from "../../console/console";
 
 export type WeatherActionModule = {
   openWeatherToken: string;

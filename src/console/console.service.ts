@@ -1,15 +1,10 @@
-import { pipe } from "@effect-ts/system/Function";
 import * as T from "@effect-ts/core/Effect";
+import { pipe } from "@effect-ts/system/Function";
 import * as colors from "colors";
 import { format } from "date-fns";
-import {
-  ConsoleModule,
-  logLevel,
-  logLevels,
-  LogLevelTypes,
-  timeFormat,
-  useColors,
-} from "./console.module";
+
+import type { ConsoleModule, LogLevelTypes } from "./console.module";
+import { logLevel, logLevels, timeFormat, useColors } from "./console.module";
 
 const consoleColors: { [k in LogLevelTypes]: (msg: string) => string } = {
   log: colors.white,

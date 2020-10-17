@@ -1,5 +1,5 @@
-import { has } from "@effect-ts/system/Has";
 import * as T from "@effect-ts/core/Effect";
+import { has } from "@effect-ts/system/Has";
 
 export enum LogLevels {
   "log" = "log",

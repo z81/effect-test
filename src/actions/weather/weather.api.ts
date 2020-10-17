@@ -1,9 +1,11 @@
+import * as E from "@effect-ts/core/Classic/Either";
 import * as T from "@effect-ts/core/Effect";
 import { pipe } from "@effect-ts/core/Function";
-import * as querystring from "querystring";
 import { Fetcher } from "fetcher-ts";
-import * as E from "@effect-ts/core/Classic/Either";
-import { Weather, WeatherRaw } from "../../models/weather";
+import * as querystring from "querystring";
+
+import type { WeatherRaw } from "../../models/weather";
+import { Weather } from "../../models/weather";
 
 export const OPEN_WEATHER_ENDPOINT =
   "http://api.openweathermap.org/data/2.5/weather";
