@@ -3,7 +3,6 @@ import * as T from "@effect-ts/core/Effect";
 import * as colors from "colors";
 import { format } from "date-fns";
 import {
-  ConsoleLogFunctions,
   ConsoleModule,
   logLevel,
   logLevels,
