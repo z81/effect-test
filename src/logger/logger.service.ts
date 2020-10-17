@@ -4,6 +4,7 @@ import * as colors from "colors";
 import { format } from "date-fns";
 import {
   ConsoleLogFunctions,
+  ConsoleModule,
   logLevel,
   logLevels,
   LogLevelTypes,
@@ -40,6 +41,13 @@ const makeLogger = (type: LogLevelTypes) => (message: string) =>
     })
   );
 
+const logServiceDefaults = {
+  logLevel: "error",
+  timeFormat: "dd.MM.yyyy HH:mm:ss",
+  useColors: true,
+};
+
 export const logService = {
   ...Object.fromEntries(logLevels.map((type) => [type, makeLogger(type)])),
-} as ConsoleLogFunctions;
+  ...logServiceDefaults,
+} as ConsoleModule;
