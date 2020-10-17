@@ -17,6 +17,10 @@ export const program = pipe(
       T.provideService(WeatherActionModule)({
         ...weatherActionService,
         ...config,
+      }),
+      T.provideService(ConsoleModule)({
+        ...logService,
+        ...config,
       })
     )
   )
@@ -24,12 +28,7 @@ export const program = pipe(
 
 const cancel = pipe(
   program,
-  T.provideService(ConsoleModule)({
-    ...logService,
-    logLevel: "info",
-    timeFormat: "dd.MM.yyyy HH:mm:ss",
-    useColors: true,
-  }),
+  T.provideService(ConsoleModule)(logService),
   T.runMain
 );
 

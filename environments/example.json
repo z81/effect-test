@@ -1,5 +1,7 @@
 {
+  "openWeatherToken": "",
   "logging": true,
-  "logLevel": "Debug",
-  "openWeatherToken": ""
+  "logLevel": "info",
+  "timeFormat": "dd.MM.yyyy HH:mm:ss",
+  "useColors": true
 }
