@@ -26,6 +26,7 @@ const makeLogger = (type: LogLevelTypes) => (message: string) =>
     }),
     T.chain(({ logLevel, timeFormat, useColors }) => {
       if (logLevels.indexOf(type) < logLevels.indexOf(logLevel)) {
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
         return T.effectTotal(() => {});
       }
 

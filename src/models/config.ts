@@ -11,6 +11,7 @@ export const Config = D.type({
   logging: D.boolean,
   logLevel: D.union(...levels),
   openWeatherToken: D.string,
+  discordToken: D.string,
 });
 
 export type ConfigRaw<T = typeof Config> = T extends D.Decoder<unknown, infer Z>

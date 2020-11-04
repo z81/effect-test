@@ -3,5 +3,6 @@
   "logging": true,
   "logLevel": "info",
   "timeFormat": "dd.MM.yyyy HH:mm:ss",
-  "useColors": true
+  "useColors": true,
+  "discordToken": ""
 }

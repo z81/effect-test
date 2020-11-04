@@ -1,5 +1,5 @@
 import * as T from "@effect-ts/core/Effect";
-import { has } from "@effect-ts/system/Has";
+import * as H from "@effect-ts/core/Has";
 
 export enum LogLevels {
   "log" = "log",
@@ -23,7 +23,7 @@ export type ConsoleModule = ConsoleLogFunctions & {
   useColors: boolean;
 };
 
-export const ConsoleModule = has<ConsoleModule>();
+export const ConsoleModule = H.tag<ConsoleModule>();
 
 export const {
   log,
